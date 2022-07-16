@@ -1,29 +1,12 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CircularProgress,
-  Grid,
-  Step,
-  StepLabel,
-  Stepper,
-} from '@material-ui/core';
-import { Field, Form, Formik, FormikConfig, FormikValues } from 'formik';
+import { Box, Card, CardContent } from '@material-ui/core';
+import { Field } from 'formik';
 import { CheckboxWithLabel, TextField } from 'formik-material-ui';
 
-import React, { useState } from 'react';
+import React from 'react';
 import * as Yup from 'yup';
 
 import { Layout } from '../Layout';
-
-import {
-  IStep,
-  IStepWizard,
-  FormikStepper,
-  FormikStep,
-  StepWizard,
-} from '../components/step-wizard';
+import { StepWizard, IStepWizardValues } from '../components/step-wizard';
 
 const step0Schema = Yup.object().shape({
   firstName: Yup.string().required('required'),
@@ -107,7 +90,7 @@ function Step2Content() {
   );
 }
 
-const stepWizardData: IStepWizard = {
+const stepWizardData: IStepWizardValues = {
   initialValues: {
     firstName: '',
     lastName: '',
@@ -139,22 +122,23 @@ const stepWizardData: IStepWizard = {
     },
   ],
 };
+
 export default function Home() {
-  const [values, setValues] = React.useState(null);
-  const onSubmit = (values: any) => {
-    alert('Form Submitted');
-    console.log({ values });
-    setValues(values);
+  const onFormSubmit = (formValues: any) => {
+    console.log(
+      '%c formValues',
+      'font-size: 36px; font-weight: bold',
+      formValues
+    );
   };
   return (
     <Layout>
-      <Box>Multi-Step Step Wizard</Box>
+      <Box>Nilesh Patel</Box>
       <Card>
         <CardContent>
-          <StepWizard data={stepWizardData} />
+          <StepWizard values={stepWizardData} onFormSubmit={onFormSubmit} />
         </CardContent>
       </Card>
-      {/* <pre>{JSON.stringify(values ? values : '')}</pre> */}
     </Layout>
   );
 }
