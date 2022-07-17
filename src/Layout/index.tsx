@@ -139,7 +139,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Box component="button" sx={{ display: { xs: 'none', md: 'block' } }}>
+        <Box component="button">
           <Drawer
             // container={container}
             // variant="temporary"
@@ -152,17 +152,6 @@ export const Layout: React.FC<LayoutProps> = (props) => {
             ModalProps={{
               keepMounted: true, // Better open performance on mobile.
             }}
-          >
-            {drawer}
-          </Drawer>
-        </Box>
-        <Box component="button" sx={{ display: { xs: 'block', md: 'none' } }}>
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
           >
             {drawer}
           </Drawer>
