@@ -3,17 +3,11 @@ import { Layout } from '../Layout';
 
 import {
   Box,
-  Button,
-  Card,
-  CardContent,
-  CircularProgress,
-  Grid,
-  Step,
-  StepLabel,
-  Stepper,
+  Card
 } from '@material-ui/core';
 
 import AnimatedNumber from '../components/AnimatedNumber';
+import { ReactElement } from 'react';
 
 function Home({ data }) {
   return (

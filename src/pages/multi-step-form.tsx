@@ -132,13 +132,13 @@ export default function Home() {
     );
   };
   return (
-    <Layout>
+    <Box>
       <Box>Nilesh Patel</Box>
       <Card>
         <CardContent>
           <StepWizard values={stepWizardData} onFormSubmit={onFormSubmit} />
         </CardContent>
       </Card>
-    </Layout>
+    </Box>
   );
 }

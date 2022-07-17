@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app';
 
 import Head from 'next/head';
 
-import { LightTheme } from '../theme';
+import { lightTheme } from '../theme';
 import {
   AppBar,
   Box,
@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
       </Head>
-      <ThemeProvider theme={LightTheme}>
+      <ThemeProvider theme={lightTheme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         {getLayout(<Component {...pageProps} />)}

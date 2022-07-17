@@ -9,10 +9,14 @@ import {
 import { Form, Formik, FormikConfig, FormikValues } from 'formik';
 
 
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { FormikStepProps } from './types';
 
-export function FormikStepper({ children, ...props }: FormikConfig<FormikValues>) {
+interface FormikStepperProps extends Omit<FormikConfig<FormikValues>,'children'>{
+    children: ReactNode | ReactNode[]
+
+}
+export function FormikStepper({ children, ...props }: FormikStepperProps) {
     const childrenArray = React.Children.toArray(
         children
     ) as React.ReactElement<FormikStepProps>[];

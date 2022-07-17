@@ -6,7 +6,6 @@ import {
   createStyles,
 } from '@material-ui/core/styles';
 
-import Hidden from '@material-ui/core/Hidden';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import AppBar from '@mui/material/AppBar';
@@ -14,22 +13,15 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 
 //drawer elements used
 import Drawer from '@mui/material/Drawer';
-import CloseIcon from '@mui/icons-material/Close';
 import Divider from '@mui/material/Divider';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import FolderIcon from '@mui/icons-material/Folder';
-import ImageIcon from '@mui/icons-material/Image';
 import DescriptionIcon from '@mui/icons-material/Description';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
-import Button from '@mui/material/Button';
 
 // nextjs
 import Link from 'next/link';
@@ -75,12 +67,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface LayoutProps {
-  container: Element;
+  // container: Element;
   children: React.ReactElement;
 }
 
 export const Layout: React.FC<LayoutProps> = (props) => {
-  const { container } = props;
+  // const { container } = props;
   const classes = useStyles();
   const theme = useTheme();
 
@@ -147,9 +139,9 @@ export const Layout: React.FC<LayoutProps> = (props) => {
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
+        <Box component="button" sx={{ display: { xs: 'none', md: 'block' } }}>
           <Drawer
-            container={container}
+            // container={container}
             // variant="temporary"
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={mobileOpen}
@@ -163,8 +155,8 @@ export const Layout: React.FC<LayoutProps> = (props) => {
           >
             {drawer}
           </Drawer>
-        </Hidden>
-        <Hidden xsDown implementation="css">
+        </Box>
+        <Box component="button" sx={{ display: { xs: 'block', md: 'none' } }}>
           <Drawer
             classes={{
               paper: classes.drawerPaper,
@@ -174,7 +166,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
           >
             {drawer}
           </Drawer>
-        </Hidden>
+        </Box>
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />

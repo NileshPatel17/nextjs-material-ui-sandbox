@@ -1,7 +1,7 @@
-mport { IconButton } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Brightness2 from '@material-ui/icons/Brightness2';
-import WbSunny from '@material-ui/icons/WbSunny';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import Brightness2Icon from '@mui/icons-material/Brightness2';
 
 import { useThemeContext } from '../context/ThemeContext';
 
@@ -18,9 +18,9 @@ const ThemeToggler = (): JSX.Element => {
       onClick={() => setThemeType(themeType === 'dark' ? 'light' : 'dark')}
     >
       {themeType === 'dark' ? (
-        <WbSunny />
+        <WbSunnyIcon />
       ) : (
-        <Brightness2 className={classes.icon} />
+        <Brightness2Icon className={classes.icon} />
       )}
     </IconButton>
   );
