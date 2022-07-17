@@ -2,7 +2,7 @@ import { Box, Card, CardContent } from '@material-ui/core';
 import { Field } from 'formik';
 import { CheckboxWithLabel, TextField } from 'formik-material-ui';
 
-import React from 'react';
+import React, { ReactElement } from 'react';
 import * as Yup from 'yup';
 
 import { Layout } from '../Layout';
@@ -123,7 +123,7 @@ const stepWizardData: IStepWizardValues = {
   ],
 };
 
-export default function Home() {
+function MultiStepForm() {
   const onFormSubmit = (formValues: any) => {
     console.log(
       '%c formValues',
@@ -142,3 +142,9 @@ export default function Home() {
     </Box>
   );
 }
+
+MultiStepForm.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};
+
+export default MultiStepForm;
