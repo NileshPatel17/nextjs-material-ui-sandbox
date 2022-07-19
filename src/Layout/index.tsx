@@ -111,7 +111,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
       <Box>
         {MENU_ITEMS.map((item) => (
           <Link href={item.link} key={item.key}>
-            <ListItemButton>
+            <ListItemButton onClick={() => setMobileOpen(false)}>
               <ListItemIcon>
                 <DescriptionIcon sx={{ color: 'primary.main' }} />
               </ListItemIcon>
