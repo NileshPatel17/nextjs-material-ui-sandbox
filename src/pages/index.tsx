@@ -1,10 +1,7 @@
 import Link from 'next/link';
 import { Layout } from '../Layout';
 
-import {
-  Box,
-  Card
-} from '@material-ui/core';
+import { Box, Card } from '@material-ui/core';
 
 import AnimatedNumber from '../components/AnimatedNumber';
 import { ReactElement } from 'react';
@@ -56,6 +53,10 @@ export async function getServerSideProps() {
     {
       title: 'personal dashboard',
       link: 'https://github.com/KaterinaLupacheva/my-projects-dashboard',
+    },
+    {
+      title: 'Formik-Antd',
+      link: 'https://github.com/jannikbuschke/formik-antd',
     },
   ];
   const data = row_data.map((item, index) => ({ ...item, key: index }));

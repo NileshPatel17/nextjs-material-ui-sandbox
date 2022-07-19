@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     appBar: {
-      marginLeft: drawerWidth,
+      // marginLeft: drawerWidth,
       [theme.breakpoints.up('sm')]: {
         width: `calc(100% - ${drawerWidth}px)`,
       },
@@ -120,7 +120,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="relative" className={classes.appBar}>
         <Toolbar>
           <IconButton
             color="inherit"
