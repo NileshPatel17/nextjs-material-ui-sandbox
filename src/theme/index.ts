@@ -27,6 +27,14 @@ const lightTheme = createMuiTheme({
     },
     divider: '#A4A6B3',
   },
+  typography: {
+    color: '#243354',
+    h1: {
+      fontWeight: 700,
+      fontSize: '36px',
+      lineHeight: '44px',
+    },
+  },
 });
 
 const darkTheme = createMuiTheme({

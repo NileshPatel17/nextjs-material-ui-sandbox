@@ -97,6 +97,12 @@ export const Layout: React.FC<LayoutProps> = (props) => {
       icon: '',
       link: '/multi-step-form',
     },
+    {
+      key: 'landing_hero',
+      label: 'Landing Hero',
+      icon: '',
+      link: '/landing-hero',
+    },
   ];
   const drawer = (
     <div>
