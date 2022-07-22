@@ -1,6 +1,7 @@
 import React, { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
+import { SessionProvider } from "next-auth/react"
 
 import Head from 'next/head';
 
@@ -44,9 +45,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         />
       </Head>
       <ThemeProvider theme={lightTheme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        {getLayout(<Component {...pageProps} />)}
+        <SessionProvider session={pageProps.session}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          {getLayout(<Component {...pageProps} />)}
+        </SessionProvider>
       </ThemeProvider>
     </React.Fragment>
   );

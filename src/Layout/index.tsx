@@ -15,6 +15,14 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
 
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
+import Tooltip from '@mui/material/Tooltip';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+
+
 //drawer elements used
 import Drawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
@@ -23,10 +31,29 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DescriptionIcon from '@mui/icons-material/Description';
 
+import { useSession, signIn, signOut } from 'next-auth/react'
+
 // nextjs
 import Link from 'next/link';
 
 const drawerWidth = 240;
+
+const settings = ['Logout'];
+
+const MENU_ITEMS = [
+  {
+    key: 'home',
+    label: 'Home',
+    icon: '',
+    link: '/',
+  },
+  {
+    key: 'multi_step_form',
+    label: 'Multi Step Form',
+    icon: '',
+    link: '/multi-step-form',
+  },
+];
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -76,7 +103,10 @@ export const Layout: React.FC<LayoutProps> = (props) => {
   const classes = useStyles();
   const theme = useTheme();
 
-  console.log(theme);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+  const { data: session, status } = useSession()
+  const loading = status === "loading"
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -84,20 +114,30 @@ export const Layout: React.FC<LayoutProps> = (props) => {
     setMobileOpen(!mobileOpen);
   }
 
-  const MENU_ITEMS = [
-    {
-      key: 'home',
-      label: 'Home',
-      icon: '',
-      link: '/',
-    },
-    {
-      key: 'multi_step_form',
-      label: 'Multi Step Form',
-      icon: '',
-      link: '/multi-step-form',
-    },
-  ];
+  const handleSignin = (e) => {
+    e.preventDefault()
+    signIn()
+  }
+
+  const handleSignout = (e) => {
+    e.preventDefault()
+    signOut()
+  }
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const onUserMenuClick = (key: string) => {
+    setAnchorElUser(null);
+    if (key === 'Logout') {
+      signOut();
+    }
+  }
+
   const drawer = (
     <div>
       <div className={classes.toolbar} />
@@ -120,23 +160,58 @@ export const Layout: React.FC<LayoutProps> = (props) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Material UI Sandbox
-          </Typography>
-          {/* <User /> */}
-        </Toolbar>
-      </AppBar>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap>
+              Material UI Sandbox
+            </Typography>
+            {!session && <Button color="inherit" onClick={handleSignin} >Sign in</Button>}
+            <Box sx={{ flexGrow: 0 }}>
+              {session &&
+                <>
+                  <Tooltip title="Open settings">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar alt="Remy Sharp" src={session.user.image} />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: '45px' }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {settings.map((setting) => (
+                      <MenuItem key={setting} onClick={() => onUserMenuClick(setting)}>
+                        <Typography textAlign="center">{setting}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </>
+              }
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </Box>
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Box component="button">

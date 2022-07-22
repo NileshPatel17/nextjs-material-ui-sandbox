@@ -2,10 +2,9 @@
 // // See more here: https://material-ui.com/customization/themes/
 
 // export default theme;
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
+import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
-const lightTheme = createMuiTheme({
+const lightTheme = createTheme({
   palette: {
     primary: {
       main: '#243354',
@@ -29,7 +28,7 @@ const lightTheme = createMuiTheme({
   },
 });
 
-const darkTheme = createMuiTheme({
+const darkTheme = createTheme({
   palette: {
     type: 'dark',
     primary: {
