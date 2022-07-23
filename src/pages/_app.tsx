@@ -1,8 +1,8 @@
 import React, { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import { SessionProvider } from "next-auth/react"
-
+import { SessionProvider } from 'next-auth/react';
+import { AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
 
 import { lightTheme } from '../theme';
@@ -27,6 +27,12 @@ type AppPropsWithLayout = AppProps & {
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page) => page);
 
+  function handleExitComplete() {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0 });
+    }
+  }
+
   return (
     <React.Fragment>
       <Head>
@@ -48,7 +54,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <SessionProvider session={pageProps.session}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          {getLayout(<Component {...pageProps} />)}
+          <AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
+            {getLayout(<Component {...pageProps} />)}
+          </AnimatePresence>
         </SessionProvider>
       </ThemeProvider>
     </React.Fragment>
