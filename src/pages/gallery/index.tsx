@@ -1,4 +1,7 @@
 import Link from 'next/link';
+import { Layout } from '../../Layout';
+
+import { ReactElement } from 'react';
 import { motion } from 'framer-motion';
 import { images } from './constants';
 
@@ -106,6 +109,10 @@ const Gallery = () => {
       </style>
     </>
   );
+};
+
+Gallery.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
 };
 
 export default Gallery;

@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
 import { images } from './constants';
 import Link from 'next/link';
+import { Layout } from '../../Layout';
 
+import { ReactElement } from 'react';
 import { motion } from 'framer-motion';
 
 const transition = {
@@ -61,4 +63,7 @@ const Page = () => {
   );
 };
 
+Page.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};
 export default Page;

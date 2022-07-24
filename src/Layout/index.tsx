@@ -21,7 +21,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-
+import Router from 'next/router';
 
 //drawer elements used
 import Drawer from '@mui/material/Drawer';
@@ -31,7 +31,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DescriptionIcon from '@mui/icons-material/Description';
 
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 // nextjs
 import Link from 'next/link';
@@ -52,6 +52,12 @@ const MENU_ITEMS = [
     label: 'Multi Step Form',
     icon: '',
     link: '/multi-step-form',
+  },
+  {
+    key: 'gallery',
+    label: 'Gallery',
+    icon: '',
+    link: '/gallery',
   },
 ];
 
@@ -103,10 +109,12 @@ export const Layout: React.FC<LayoutProps> = (props) => {
   const classes = useStyles();
   const theme = useTheme();
 
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
 
-  const { data: session, status } = useSession()
-  const loading = status === "loading"
+  const { data: session, status } = useSession();
+  const loading = status === 'loading';
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -115,14 +123,14 @@ export const Layout: React.FC<LayoutProps> = (props) => {
   }
 
   const handleSignin = (e) => {
-    e.preventDefault()
-    signIn()
-  }
+    e.preventDefault();
+    signIn();
+  };
 
   const handleSignout = (e) => {
-    e.preventDefault()
-    signOut()
-  }
+    e.preventDefault();
+    signOut();
+  };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -136,7 +144,12 @@ export const Layout: React.FC<LayoutProps> = (props) => {
     if (key === 'Logout') {
       signOut();
     }
-  }
+  };
+
+  const gotoPage = (link: string) => {
+    setMobileOpen((isOpen) => !isOpen);
+    Router.push(link);
+  };
 
   const drawer = (
     <div>
@@ -144,14 +157,14 @@ export const Layout: React.FC<LayoutProps> = (props) => {
       <Divider />
       <Box>
         {MENU_ITEMS.map((item) => (
-          <Link href={item.link} key={item.key}>
+          <div onClick={() => gotoPage(item.link)} key={item.key}>
             <ListItemButton>
               <ListItemIcon>
                 <DescriptionIcon sx={{ color: 'primary.main' }} />
               </ListItemIcon>
               <ListItemText primary={item.label} />
             </ListItemButton>
-          </Link>
+          </div>
         ))}
       </Box>
     </div>
@@ -175,9 +188,13 @@ export const Layout: React.FC<LayoutProps> = (props) => {
             <Typography variant="h6" noWrap>
               Material UI Sandbox
             </Typography>
-            {!session && <Button color="inherit" onClick={handleSignin} >Sign in</Button>}
+            {!session && (
+              <Button color="inherit" onClick={handleSignin}>
+                Sign in
+              </Button>
+            )}
             <Box sx={{ flexGrow: 0 }}>
-              {session &&
+              {session && (
                 <>
                   <Tooltip title="Open settings">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -201,13 +218,16 @@ export const Layout: React.FC<LayoutProps> = (props) => {
                     onClose={handleCloseUserMenu}
                   >
                     {settings.map((setting) => (
-                      <MenuItem key={setting} onClick={() => onUserMenuClick(setting)}>
+                      <MenuItem
+                        key={setting}
+                        onClick={() => onUserMenuClick(setting)}
+                      >
                         <Typography textAlign="center">{setting}</Typography>
                       </MenuItem>
                     ))}
                   </Menu>
                 </>
-              }
+              )}
             </Box>
           </Toolbar>
         </AppBar>
