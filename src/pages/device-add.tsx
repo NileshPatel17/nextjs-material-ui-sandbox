@@ -4,8 +4,9 @@ import React, { ReactElement } from 'react';
 import { Layout } from '../Layout';
 import { RJSFSchema } from '@rjsf/utils';
 import validator from '@rjsf/validator-ajv8';
+import Form from '@rjsf/core';
 
-const Form = JSONSchemaForm.default;
+// const Form = JSONSchemaForm.default;
 
 const schema: RJSFSchema = {
   title: 'Todo',
