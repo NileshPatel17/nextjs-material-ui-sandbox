@@ -53,6 +53,12 @@ const MENU_ITEMS = [
     icon: '',
     link: '/multi-step-form',
   },
+  {
+    key: 'device_add',
+    label: 'Add Device',
+    icon: '',
+    link: '/device-add',
+  },
 ];
 
 const useStyles = makeStyles((theme: Theme) =>
