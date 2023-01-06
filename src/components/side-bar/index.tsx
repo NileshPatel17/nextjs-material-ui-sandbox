@@ -6,6 +6,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { Box, Collapse, List, ListItem } from '@mui/material';
 
 import { items } from './data';
+import { useRouter } from 'next/router';
 
 function SidebarItem({
   depthStep = 10,
@@ -17,6 +18,8 @@ function SidebarItem({
   const [collapsed, setCollapsed] = React.useState(true);
   const { label, items, Icon, onClick: onClickProp } = item;
 
+  const router = useRouter();
+
   function toggleCollapse() {
     setCollapsed((prevValue) => !prevValue);
   }
@@ -25,8 +28,13 @@ function SidebarItem({
     if (Array.isArray(items)) {
       toggleCollapse();
     }
+
     if (onClickProp) {
       onClickProp(item);
+      if (item.link) {
+        e.preventDefault();
+        router.push(item.link);
+      }
     }
   }
 

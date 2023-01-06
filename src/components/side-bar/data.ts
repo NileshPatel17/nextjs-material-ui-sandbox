@@ -3,13 +3,29 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';
 import SettingsIcon from '@mui/icons-material/Settings';
+import AddAlertIcon from '@mui/icons-material/AddAlert';
 
 function onClick(e, item) {
   window.alert(JSON.stringify(item, null, 2));
 }
 
 export const items = [
-  { name: 'home', label: 'Home', Icon: HomeIcon, depth: 0, depthStep: 1 },
+  {
+    name: 'home',
+    label: 'Home',
+    Icon: HomeIcon,
+    depth: 0,
+    depthStep: 1,
+    // link: '/',
+  },
+  {
+    name: 'home',
+    label: 'Multi Step Form',
+    Icon: AddAlertIcon,
+    depth: 0,
+    depthStep: 1,
+    // link: '/multi-step-form',
+  },
   {
     name: 'billing',
     label: 'Billing',
