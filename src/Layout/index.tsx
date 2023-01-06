@@ -22,7 +22,6 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-
 //drawer elements used
 import Drawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
@@ -31,7 +30,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DescriptionIcon from '@mui/icons-material/Description';
 
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession, signIn, signOut } from 'next-auth/react';
+
+import Sidebar from '../components/side-bar';
 
 // nextjs
 import Link from 'next/link';
@@ -39,27 +40,6 @@ import Link from 'next/link';
 const drawerWidth = 240;
 
 const settings = ['Logout'];
-
-const MENU_ITEMS = [
-  {
-    key: 'home',
-    label: 'Home',
-    icon: '',
-    link: '/',
-  },
-  {
-    key: 'multi_step_form',
-    label: 'Multi Step Form',
-    icon: '',
-    link: '/multi-step-form',
-  },
-  {
-    key: 'device_add',
-    label: 'Add Device',
-    icon: '',
-    link: '/device-add',
-  },
-];
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -109,10 +89,12 @@ export const Layout: React.FC<LayoutProps> = (props) => {
   const classes = useStyles();
   const theme = useTheme();
 
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
 
-  const { data: session, status } = useSession()
-  const loading = status === "loading"
+  const { data: session, status } = useSession();
+  const loading = status === 'loading';
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -121,14 +103,14 @@ export const Layout: React.FC<LayoutProps> = (props) => {
   }
 
   const handleSignin = (e) => {
-    e.preventDefault()
-    signIn()
-  }
+    e.preventDefault();
+    signIn();
+  };
 
   const handleSignout = (e) => {
-    e.preventDefault()
-    signOut()
-  }
+    e.preventDefault();
+    signOut();
+  };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -142,14 +124,14 @@ export const Layout: React.FC<LayoutProps> = (props) => {
     if (key === 'Logout') {
       signOut();
     }
-  }
+  };
 
   const drawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
       <Box>
-        {MENU_ITEMS.map((item) => (
+        {/* {MENU_ITEMS.map((item) => (
           <Link href={item.link} key={item.key}>
             <ListItemButton>
               <ListItemIcon>
@@ -158,7 +140,8 @@ export const Layout: React.FC<LayoutProps> = (props) => {
               <ListItemText primary={item.label} />
             </ListItemButton>
           </Link>
-        ))}
+        ))} */}
+        <Sidebar />
       </Box>
     </div>
   );
@@ -181,9 +164,13 @@ export const Layout: React.FC<LayoutProps> = (props) => {
             <Typography variant="h6" noWrap>
               Material UI Sandbox
             </Typography>
-            {!session && <Button color="inherit" onClick={handleSignin} >Sign in</Button>}
+            {!session && (
+              <Button color="inherit" onClick={handleSignin}>
+                Sign in
+              </Button>
+            )}
             <Box sx={{ flexGrow: 0 }}>
-              {session &&
+              {session && (
                 <>
                   <Tooltip title="Open settings">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -207,13 +194,16 @@ export const Layout: React.FC<LayoutProps> = (props) => {
                     onClose={handleCloseUserMenu}
                   >
                     {settings.map((setting) => (
-                      <MenuItem key={setting} onClick={() => onUserMenuClick(setting)}>
+                      <MenuItem
+                        key={setting}
+                        onClick={() => onUserMenuClick(setting)}
+                      >
                         <Typography textAlign="center">{setting}</Typography>
                       </MenuItem>
                     ))}
                   </Menu>
                 </>
-              }
+              )}
             </Box>
           </Toolbar>
         </AppBar>

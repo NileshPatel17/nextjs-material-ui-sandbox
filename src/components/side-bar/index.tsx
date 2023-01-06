@@ -19,7 +19,6 @@ function SidebarItem({
 
   function toggleCollapse() {
     setCollapsed((prevValue) => !prevValue);
-    x;
   }
 
   function onClick(e) {
@@ -62,7 +61,11 @@ function SidebarItem({
           }}
         >
           {Icon && <Icon sx={{ marginRight: '6px', fontSize: 'small' }} />}
-          <Box sx={{ width: '100%' }}>{label}</Box>
+          <Box
+            sx={{ width: '100%', border: '0px solid blue', padding: '4px 0' }}
+          >
+            {label}
+          </Box>
         </Box>
         {expandIcon}
       </ListItem>
@@ -89,7 +92,7 @@ function SidebarItem({
   );
 }
 
-function Sidebar({ depthStep, depth, expanded }) {
+function Sidebar() {
   return (
     <Box
       sx={{
@@ -105,9 +108,9 @@ function Sidebar({ depthStep, depth, expanded }) {
               <Divider style={{ margin: '6px 0' }} />
             ) : (
               <SidebarItem
-                // depthStep={depthStep}
-                // depth={depth}
-                // expanded={expanded}
+                depthStep={sidebarItem.depthStep}
+                depth={sidebarItem.depth}
+                expanded={sidebarItem.expanded}
                 item={sidebarItem}
               />
             )}
