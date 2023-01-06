@@ -54,7 +54,7 @@ function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
   width: 100%;
           }}
         >
-          {Icon && <Icon className="sidebar-item-icon" fontSize="small" />}
+          {Icon && <Icon sx={{marginRight: '6px', fontSize:"small" }} />}
           <Box sx={{width: '100%'}}>{label}</Box>
         </Box>
         {expandIcon}
