@@ -33,19 +33,30 @@ function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
   return (
     <>
       <ListItem
-        className="sidebar-item"
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
         onClick={onClick}
         button
         dense
         {...rest}
       >
-        <div
-          style={{ paddingLeft: depth * depthStep }}
-          className="sidebar-item-content"
+        <Box
+          sx={{
+            paddingLeft: depth * depthStep,
+            whiteSpace: 'nowrap',
+  textVverflow: 'ellipsis',
+  overflow: 'hidden',
+  display: 'flex',
+  alignItems: 'center'
+  width: 100%;
+          }}
         >
           {Icon && <Icon className="sidebar-item-icon" fontSize="small" />}
-          <div className="sidebar-item-text">{label}</div>
-        </div>
+          <Box sx={{width: '100%'}}>{label}</Box>
+        </Box>
         {expandIcon}
       </ListItem>
       <Collapse in={!collapsed} timeout="auto" unmountOnExit>
