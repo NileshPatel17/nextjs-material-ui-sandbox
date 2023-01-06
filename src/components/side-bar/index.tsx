@@ -26,7 +26,7 @@ function SidebarItem({
       toggleCollapse();
     }
     if (onClickProp) {
-      onClickProp(e, item);
+      onClickProp(item);
     }
   }
 
@@ -92,7 +92,7 @@ function SidebarItem({
   );
 }
 
-function Sidebar() {
+function Sidebar({ onClick }) {
   return (
     <Box
       sx={{

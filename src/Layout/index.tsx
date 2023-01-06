@@ -141,7 +141,11 @@ export const Layout: React.FC<LayoutProps> = (props) => {
             </ListItemButton>
           </Link>
         ))} */}
-        <Sidebar />
+        <Sidebar
+          onClick={(e, item) => {
+            console.log({ item });
+          }}
+        />
       </Box>
     </div>
   );
