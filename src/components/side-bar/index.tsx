@@ -7,12 +7,19 @@ import { Box, Collapse, List, ListItem } from '@mui/material';
 
 import { items } from './data';
 
-function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
+function SidebarItem({
+  depthStep = 10,
+  depth = 0,
+  expanded = true,
+  item,
+  ...rest
+}) {
   const [collapsed, setCollapsed] = React.useState(true);
   const { label, items, Icon, onClick: onClickProp } = item;
 
   function toggleCollapse() {
     setCollapsed((prevValue) => !prevValue);
+    x;
   }
 
   function onClick(e) {
@@ -47,15 +54,15 @@ function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
           sx={{
             paddingLeft: depth * depthStep,
             whiteSpace: 'nowrap',
-  textVverflow: 'ellipsis',
-  overflow: 'hidden',
-  display: 'flex',
-  alignItems: 'center'
-  width: 100%;
+            textVverflow: 'ellipsis',
+            overflow: 'hidden',
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
           }}
         >
-          {Icon && <Icon sx={{marginRight: '6px', fontSize:"small" }} />}
-          <Box sx={{width: '100%'}}>{label}</Box>
+          {Icon && <Icon sx={{ marginRight: '6px', fontSize: 'small' }} />}
+          <Box sx={{ width: '100%' }}>{label}</Box>
         </Box>
         {expandIcon}
       </ListItem>
@@ -82,7 +89,7 @@ function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
   );
 }
 
-function Sidebar({ items, depthStep, depth, expanded }) {
+function Sidebar({ depthStep, depth, expanded }) {
   return (
     <Box
       sx={{
@@ -98,9 +105,9 @@ function Sidebar({ items, depthStep, depth, expanded }) {
               <Divider style={{ margin: '6px 0' }} />
             ) : (
               <SidebarItem
-                depthStep={depthStep}
-                depth={depth}
-                expanded={expanded}
+                // depthStep={depthStep}
+                // depth={depth}
+                // expanded={expanded}
                 item={sidebarItem}
               />
             )}
